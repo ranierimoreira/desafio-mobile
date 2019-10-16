@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -28,10 +29,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private static final String TAG = MovieDetailActivity.class.getSimpleName();
 
-    public static final String EXTRA_TITLE = "com.rbm.example.moviechallenge.EXTRA_TITLE";
-    public static final String EXTRA_OVERVIEW = "com.rbm.example.moviechallenge.EXTRA_OVERVIEW";
-    public static final String EXTRA_RELEASE_DATE = "com.rbm.example.moviechallenge.EXTRA_RELEASE_DATE";
-    public static final String EXTRA_BACKDROP_PATH = "com.rbm.example.moviechallenge.EXTRA_BACKDROP_PATH";
     public static final String EXTRA_ID = "com.rbm.example.moviechallenge.EXTRA_ID";
     BindingHolder<ContentMovieDetailBinding> bindingHolder;
     MovieDetailData movieData;
@@ -54,12 +51,13 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void onMovieUpdate(MovieDetailData movieDetailData) {
         Log.d(TAG, movieDetailData.getTitle());
         bindingHolder.getBinding().setMovieDetail(movieDetailData);
+    }
 
-        /*ImageView movieImage = findViewById(R.id.movie_detail_image_view);
-
+    @BindingAdapter("setImageFromServerByUrl")
+    public static void setImageUrl(ImageView view, String url) {
         Picasso picasso = Picasso.get();
-        picasso.load(ApiClient.IMAGE_LARGE_URL + backdropPath)
+        picasso.load(ApiClient.IMAGE_LARGE_URL + url)
                 .placeholder(R.drawable.image_not_found)
-                .into(movieImage);*/
+                .into(view);
     }
 }
